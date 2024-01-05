@@ -1,12 +1,12 @@
 import React from 'react'
 import Sidenav from '../components/Sidenav'
-import Table from '../components/Table'
+import EnhancedTable from '../components/EnhancedTable'
 
 export default function Users() {
   return (
     <>
         <Sidenav />
-        <Table />
+        <EnhancedTable />
         <div>
             Users
         </div>

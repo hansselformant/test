@@ -1,0 +1,89 @@
+import React, { useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TextField } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
+
+export default function EditableTable() {
+  const initialData = [
+    { id: 1, name: 'John', age: 25 },
+    { id: 2, name: 'Jane', age: 30 },
+    // ... more data
+  ];
+
+  const [data, setData] = useState(initialData);
+  const [editIndex, setEditIndex] = useState(null);
+  const [editedValue, setEditedValue] = useState({});
+
+  const handleEditClick = (index, field, value) => {
+    setEditIndex(index);
+    setEditedValue({ [field]: value });
+  };
+
+  const handleSaveClick = (index) => {
+    // Update the data with the edited value
+    const newData = [...data];
+    newData[index] = { ...newData[index], ...editedValue };
+    setData(newData);
+
+    // Reset edit state
+    setEditIndex(null);
+    setEditedValue({});
+  };
+
+  const handleChange = (field, value) => {
+    setEditedValue({ [field]: value });
+  };
+
+  return (
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Age</TableCell>
+            <TableCell>Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row, index) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>
+                {editIndex === index ? (
+                  <TextField
+                    value={editedValue.name || row.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
+                  />
+                ) : (
+                  row.name
+                )}
+              </TableCell>
+              <TableCell>
+                {editIndex === index ? (
+                  <TextField
+                    value={editedValue.age || row.age}
+                    onChange={(e) => handleChange('age', e.target.value)}
+                  />
+                ) : (
+                  row.age
+                )}
+              </TableCell>
+              <TableCell>
+                {editIndex === index ? (
+                  <IconButton onClick={() => handleSaveClick(index)}>
+                    <SaveIcon />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={() => handleEditClick(index, 'name', row.name)}>
+                    <EditIcon />
+                  </IconButton>
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
