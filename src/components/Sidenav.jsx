@@ -24,7 +24,7 @@ import PLCIcon from '@mui/icons-material/DeveloperBoard';
 import FactoryIcon from '@mui/icons-material/FactoryOutlined';
 import InventoryIcon from '@mui/icons-material/InventoryOutlined';
 import ProductsIcon from '@mui/icons-material/Inventory2Outlined';
-
+import fotoHanssel from '../assets/foto.png'
 
 
 const drawerWidth = 240;
@@ -100,8 +100,8 @@ const menuItems = [
   { text: 'Robots', icon: <RobotsIcon/> },
   { text: 'PLC', icon: <PLCIcon/> },
   { text: 'Factory', icon: <FactoryIcon/> },
-  { text: 'Inventory', icon: <InventoryIcon/> },
-  { text: 'Products', icon: <ProductsIcon/> },
+  // { text: 'Inventory', icon: <InventoryIcon/> },
+  // { text: 'Products', icon: <ProductsIcon/> },
 ];
 
 const iconMap = {
@@ -110,8 +110,8 @@ const iconMap = {
   Robots: <RobotsIcon/> ,
   PLC: <PLCIcon/> ,
   Factory: <FactoryIcon/> ,
-  Inventory: <InventoryIcon/> ,
-  Products: <ProductsIcon/> ,
+  // Inventory: <InventoryIcon/> ,
+  // Products: <ProductsIcon/> ,
 }
 
 export default function Sidenav() {
@@ -150,13 +150,17 @@ export default function Sidenav() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
+  <IconButton onClick={handleDrawerClose} style={{ display: 'flex', alignItems: 'flex-start' }}>
+    <img src={fotoHanssel} alt="foto" style={{ height: 40, marginRight: 16, borderRadius: 40 / 2 }} />
+    <Typography style={{ marginRight: 120, marginLeft: -60, marginTop: 50 }}>
+      Admin
+    </Typography>
+    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+  </IconButton>
+</DrawerHeader>
         <Divider />
         <List>
-          {['Users', 'Groups', 'Robots', 'PLC', 'Factory', 'Inventory', 'Products'].map((text, index) => (
+          {['Users', 'Groups', 'Robots', 'PLC', 'Factory'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -180,7 +184,7 @@ export default function Sidenav() {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Typography paragraph>
           Lorem 
@@ -188,7 +192,7 @@ export default function Sidenav() {
         <Typography paragraph>
           Consequat 
         </Typography>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

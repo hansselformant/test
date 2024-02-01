@@ -5,10 +5,9 @@ import EnhancedTable from '../components/EnhancedTable'
 export default function Users() {
   return (
     <>
-        <Sidenav />
-        <EnhancedTable />
-        <div>
-            Users
+        <div style={{ display: 'flex'}}>
+          <Sidenav />
+          <EnhancedTable />
         </div>
     </>
   )
